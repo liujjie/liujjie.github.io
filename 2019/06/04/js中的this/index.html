@@ -7,13 +7,17 @@
   
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="js中的this在函数种this到底取何值，是在函数真正被调用的时候才能确定，函数定义的时候确定不了。 this的赋值分为四种情况： 情况1：构造函数所谓构造函数就是用来new对象的函数。严格来说所有函数都可以new一个对象，只是构造函数的定义就是专门为了new对象。 如果函数作为构造函数用，那么this就代表他即将new的对象 12345678function Person()&amp;#123;">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/06/04/js中的this/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="js中的this在函数种this到底取何值，是在函数真正被调用的时候才能确定，函数定义的时候确定不了。 this的赋值分为四种情况： 情况1：构造函数所谓构造函数就是用来new对象的函数。严格来说所有函数都可以new一个对象，只是构造函数的定义就是专门为了new对象。 如果函数作为构造函数用，那么this就代表他即将new的对象 12345678function Person()&amp;#123;">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-08T13:21:25.799Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="js中的this在函数种this到底取何值，是在函数真正被调用的时候才能确定，函数定义的时候确定不了。 this的赋值分为四种情况： 情况1：构造函数所谓构造函数就是用来new对象的函数。严格来说所有函数都可以new一个对象，只是构造函数的定义就是专门为了new对象。 如果函数作为构造函数用，那么this就代表他即将new的对象 12345678function Person()&amp;#123;">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -60,53 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-js中的构造函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/04/js中的构造函数/" class="article-date">
-  <time datetime="2019-06-04T13:49:47.217Z" itemprop="datePublished">2019-06-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="javascript中的构造函数"><a href="#javascript中的构造函数" class="headerlink" title="javascript中的构造函数"></a>javascript中的构造函数</h1><p>   典型的面向对象编程语言（比如C++和Java），存在“类”（class）这个概念。所谓“类”就是对象的模板，对象就是“类”的实例。但是，在JavaScript语言的对象体系，不是基于“类”的，而是基于构造函数（constructor）和原型链（prototype）。</p>
-<h4 id="对象的概念："><a href="#对象的概念：" class="headerlink" title="对象的概念："></a>对象的概念：</h4><p>​     “面向对象编程”（Object Oriented Programming，缩写为OOP）是目前主流的编程范式。它的核心思想是将真实世界中各种复杂的关系，抽象为一个个对象，然后由对象之间的分工与合作，完成对真实世界的模拟。</p>
-<p>对js中的对象做一个简单的总结，如下：</p>
-<p>  a:对象是单个实物的抽象。</p>
-<p>  b:对象是一个容器，封装了属性和方法。</p>
-<h4 id="构造函数："><a href="#构造函数：" class="headerlink" title="构造函数："></a>构造函数：</h4><p>​       ‘面向对象编程’的第一步，就是要生成对象。而js中面向对象编程是基于构造函数（constructor）和原型链（prototype）的。</p>
-<p>　　前面说过，“对象”是单个实物的抽象。通常需要一个模板，表示某一类实物的共同特征，然后“对象”根据这个模板生成。</p>
-<p>　　js语言中使用构造函数（constructor）作为对象的模板。所谓构造函数，就是提供一个生成对象的模板，并描述对象的基本结构的函数。一个构造函数，可以生成多个对象，每个对象都有相同的结构。</p>
-<p>​         构造函数的三大特点：</p>
-<p>​         a:构造函数的第一格字母通常大写。</p>
-<p>​         b:构造函数内使用关键字，代表所要生成的对象实例。</p>
-<p>​         c:生成对象的时候，必须使用new关键字。</p>
-<h4 id="new命令"><a href="#new命令" class="headerlink" title="new命令"></a>new命令</h4><p>​         new命令的作用就是执行一个构造函数，并且返回一个对象实例。使用new命令时，他后面的函数调用就不是正常的调用，而是依次执行下面的步骤：</p>
-<p>​          a:创建一个空的对象，作为将要返回的对象实例。</p>
-<p>​          b:将空对象的原型指向了构造函数的prototype属性。</p>
-<p>​          c:将空对象赋值给构造函数内部的this关键字。</p>
-<p>​          d:开始执行构造函数内部的代码。</p>
-<p>​          也就是说，构造函数内部，this指向的是一个新生成的空对象，所有针对this的操作，都会发生在这个空对象中（即this对象），将其构造为需要的样子。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/04/js中的构造函数/" data-id="cjwhv1x070002vskxndba44si" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-js中的this" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-js中的this" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/04/js中的this/" class="article-date">
   <time datetime="2019-06-04T13:49:47.199Z" itemprop="datePublished">2019-06-04</time>
@@ -152,40 +110,28 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-graphql" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/04/graphql/" class="article-date">
-  <time datetime="2019-06-04T13:49:47.175Z" itemprop="datePublished">2019-06-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h1><h4 id="GraphQL是什么？"><a href="#GraphQL是什么？" class="headerlink" title="GraphQL是什么？"></a>GraphQL是什么？</h4><p>GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
-<p>GraphQL 是一个用于 API 的查询语言，是一个使用基于类型系统来执行查询的服务端运行时（类型系统由你的数据定义）。GraphQL 并没有和任何特定数据库或者存储引擎绑定，而是依靠你现有的代码和数据支撑。</p>
-<p><a href="https://github.com/liujjie/liujjie.github.io/blob/master/img/QQ%E5%9B%BE%E7%89%8720190411203317.jpg" target="_blank" rel="noopener">https://github.com/liujjie/liujjie.github.io/blob/master/img/QQ%E5%9B%BE%E7%89%8720190411203317.jpg</a></p>
+    <a href="/2019/06/04/js中的构造函数/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/04/graphql/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/04/graphql/" data-id="cjwhv1wzw0000vskx6mwzvkg0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
 
 </section>
         
