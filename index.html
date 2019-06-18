@@ -96,7 +96,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/04/js中的构造函数/" data-id="cjwhv3zry000270kx4t1k15fn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/04/js中的构造函数/" data-id="cjx1vobnr00012kkxo8bhlnq3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -146,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/04/js中的this/" data-id="cjwhv3zrh000170kxgxszskgf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/04/js中的this/" data-id="cjx1vobnu00022kkxm4kqog8h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -168,14 +168,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h1><h4 id="GraphQL是什么？"><a href="#GraphQL是什么？" class="headerlink" title="GraphQL是什么？"></a>GraphQL是什么？</h4><p>GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
-<p>GraphQL 是一个用于 API 的查询语言，是一个使用基于类型系统来执行查询的服务端运行时（类型系统由你的数据定义）。GraphQL 并没有和任何特定数据库或者存储引擎绑定，而是依靠你现有的代码和数据支撑。</p>
-<p><a href="https://github.com/liujjie/liujjie.github.io/blob/master/img/QQ%E5%9B%BE%E7%89%8720190411203317.jpg" target="_blank" rel="noopener">https://github.com/liujjie/liujjie.github.io/blob/master/img/QQ%E5%9B%BE%E7%89%8720190411203317.jpg</a></p>
+        <h1 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h1><h4 id="GraphQL介绍"><a href="#GraphQL介绍" class="headerlink" title="GraphQL介绍"></a>GraphQL介绍</h4><p>· GraphQL是facebook开发的一种数据查询语言，并于2015年公布开发，它是rest api的替代品</p>
+<p>· GraphQL既是一种用于api的查询语言 也是一个满足你数据查询的运行时。GraphQL对你的API中的数据提供了一套易于理解的完整描述，使客户端能够准确的获得它需要的数据，而且没有任何冗余，也让API更容易的随时间推移而演进。</p>
+<p>· 官网：<a href="https://graphql.org/" target="_blank" rel="noopener">https://graphql.org/</a></p>
+<p>· 中文网：<a href="http://graphql.cn/" target="_blank" rel="noopener">http://graphql.cn/</a></p>
+<h4 id="·-特点："><a href="#·-特点：" class="headerlink" title="· 特点："></a>· 特点：</h4><pre><code>1.请求需要的数据，不多不少
 
+ 例如：account中有 name，age，sex，department等。可以只取到需要的字段。
+
+2.获取多个资源，只用一个请求
+
+3.描述所有可能类型的系统。便于维护，根据需求平滑演进，添加或者隐藏字段。</code></pre><h4 id="·-GraphQL与restful对比"><a href="#·-GraphQL与restful对比" class="headerlink" title="· GraphQL与restful对比"></a>· GraphQL与restful对比</h4><p>· restful: 属性状态转移.本质就是用定义url,通过api接口来取得资源.通用系统架构.不受语言限制.</p>
+<p>· restful一个接口只能返回一个资源,graphql一次可以获取多个资源.</p>
+<p>· restful用不同的url来区分资源,graphql用类型区分资源</p>
+<h4 id="·-使用express-GraphQL"><a href="#·-使用express-GraphQL" class="headerlink" title="· 使用express+GraphQL"></a>· 使用express+GraphQL</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">const express = require(&apos;express&apos;);</span><br><span class="line">const &#123;buildSchema&#125; = require(&apos;graphql&apos;);</span><br><span class="line">const graphqlHttp = require(&apos;express-graphql&apos;);//解构graphql的中间件</span><br><span class="line">//定义schema,查询和类型</span><br><span class="line">const schema = buildSchema(`</span><br><span class="line">    type Account&#123;</span><br><span class="line">        name:String</span><br><span class="line">        age:Int</span><br><span class="line">        sex:String</span><br><span class="line">        department:String</span><br><span class="line">    &#125;</span><br><span class="line">    type Query&#123;</span><br><span class="line">        hello: String</span><br><span class="line">        accountName: String</span><br><span class="line">        account: Account</span><br><span class="line">    &#125;</span><br><span class="line">`)</span><br><span class="line">//定义查询对应的处理器</span><br><span class="line">const root = &#123;</span><br><span class="line">    hello:()=&gt;&#123;</span><br><span class="line">        return &apos;hello world&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    accountName:()=&gt;&#123;</span><br><span class="line">        return &apos;zahngsan&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    account:()=&gt;&#123;</span><br><span class="line">        return&#123;</span><br><span class="line">            name:&quot;lisi&quot;,</span><br><span class="line">            age:18,</span><br><span class="line">            sex:&quot;男&quot;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;//定义查询所对应的处理器</span><br><span class="line"></span><br><span class="line">const app = express();</span><br><span class="line">app.use(`/graphql`,graphqlHttp(&#123;</span><br><span class="line">    schema: schema,</span><br><span class="line">    rootValue: root,</span><br><span class="line">    graphiql: true //是否启用调试界面</span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line">app.listen(8000,()=&gt;&#123;</span><br><span class="line">    console.log(&quot;running&quot;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>· 基本参数类型</p>
+<pre><code>String, Int ,Float ,boolean 和 ID.可以在shema声明的时候直接使用.
+
+[类型]代表数组,例如:[Int]代表整型数组.</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/04/graphql/" data-id="cjwhv3zr8000070kxs8g310a1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/04/graphql/" data-id="cjx1vobim00002kkxqyq8ewwq" class="article-share-link">Share</a>
       
       
     </footer>
