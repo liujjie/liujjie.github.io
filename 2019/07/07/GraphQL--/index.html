@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title> - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="什么是GraphQL？· GraphQL是facebook开发的一种数据查询语言，并于2015年公布开发，它是rest api的替代品
+· GraphQL既是一种用于api的查询语言 也是一个满足你,"> 
+    <meta name="author" content="xf"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="../../../../img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="../../../../css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="https://liujjie.github.io"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle"></h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title"></h1>
+        <div class="stuff">
+            <span>七月 07, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <h2 id="什么是GraphQL？"><a href="#什么是GraphQL？" class="headerlink" title="什么是GraphQL？"></a>什么是GraphQL？</h2><p>· GraphQL是facebook开发的一种数据查询语言，并于2015年公布开发，它是rest api的替代品</p>
+<p>· GraphQL既是一种用于api的查询语言 也是一个满足你数据查询的运行时。GraphQL对你的API中的数据提供了一套易于理解的完整描述，使客户端能够准确的获得它需要的数据，而且没有任何冗余，也让API更容易的随时间推移而演进。</p>
+<p>介绍GraphQL是什么的文章网上一搜一大把，篇幅有长有短，但是从最核心上讲，它是一种查询语言，再进一步说，是一种API查询语言。</p>
+<p>我们在使用REST接口时，接口返回的数据格式、数据类型都是后端预先定义好的，如果返回的数据格式并不是调用者所期望的，作为前端的我们可以通过以下两种方式来解决问题：</p>
+<ul>
+<li>和后端沟通，改接口（更改数据源）</li>
+<li>自己做一些适配工作（处理数据源）</li>
+</ul>
+<p>一般如果是个人项目，改后端接口这种事情可以随意搞，但是如果是公司项目，改后端接口往往是一件比较敏感的事情，尤其是对于三端（web、andriod、ios）公用同一套后端接口的情况。大部分情况下，均是按第二种方式来解决问题的。</p>
+<p>因此如果接口的返回值，可以通过某种手段，从静态变为动态，即调用者来声明接口返回什么数据，很大程度上可以进一步解耦前后端的关联。</p>
+<h2 id="GraphQL的特征"><a href="#GraphQL的特征" class="headerlink" title="GraphQL的特征"></a>GraphQL的特征</h2><ul>
+<li>可描述性的：使用GraphQL，你获取的都是你想要的数据，不多也不会少；</li>
+<li>分级性的：GraphQL天然遵循对象间的关系，通过一个简单的请求，我们可以获取到一个对象及其相关的对象，比如说，通过一个简单的请求，我们可以获取一个作者和他创建的所有文章，然后可以获取文章的所有评论；</li>
+<li>强类型的：使用GraphQL的类型系统，我们可以描述能够被服务器查询的可能的数据，然后确保从服务器获取到的数据和我们查询的一致；</li>
+<li>不做语言限制：并不绑定于某一特定的语言，实际上现在已经有一些不同的语言有了实践；</li>
+<li>兼容于任何后台：GraphQL不限于某一特定数据库，可以使用已经存在的数据，代码，甚至可以连接第三方的APIs.</li>
+<li>好反省的：GraphQL服务器能够查询架构的细节。</li>
+</ul>
+<p>GraphQL的核心包括<code>Query</code>,<code>Mutation</code>,<code>Schemas</code>等等，每个概念下又有一些子概念,下面分别做简单的介绍：</p>
+<h2 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h2><p>Queries用做读操作，也就是从服务器获取数据。Queries定义了我们对模式执行的行为。下面是一个简单的查询及相应的结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Basic GraphQL Query</span><br><span class="line"></span><br><span class="line">   &#123;</span><br><span class="line">     author &#123;</span><br><span class="line">       name</span><br><span class="line">       posts &#123;</span><br><span class="line">         title</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// Basic GraphQL Query Response</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;author&quot;: &#123;</span><br><span class="line">      &quot;name&quot;: &quot;Chimezie Enyinnaya&quot;,</span><br><span class="line">      &quot;posts&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;title&quot;: &quot;How to build a collaborative note app using Laravel&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;title&quot;: &quot;Event-Driven Laravel Applications&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查询和响应具备相同的结构。</p>
+<h3 id="对query结果的解释"><a href="#对query结果的解释" class="headerlink" title="对query结果的解释"></a>对query结果的解释</h3><p>如果一个操作没有<code>type</code>，GraphQL默认会把这些操作看做<code>query</code>。<code>query</code>还可以拥有名字，虽然是可选的，但是可以帮助识别某个query是做什么的。</p>
+<p>query也可以拥有注释，注释以<code>#</code>开头。</p>
+<h4 id="Field"><a href="#Field" class="headerlink" title="Field"></a>Field</h4><p>Field是我们想从服务器获取的对象的基本组成部分。上述代码中<code>name</code>就是<code>author</code>对象的一个<code>Field</code>.</p>
+<h4 id="Argument"><a href="#Argument" class="headerlink" title="Argument"></a>Argument</h4><p>和普通的函数一样，<code>query</code>可以拥有参数，参数是可选的或需求的。参数使用方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  author(id: 5) &#123;</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，GraphQL中的字符串需要包装在双引号中。</p>
+<h4 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h4><p>除了参数，query还允许你使用变量来让参数可动态变化，变量以<code>$</code>开头书写，使用方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">query GetAuthor($authorID: Int!) &#123;</span><br><span class="line">  author(id: $authorID) &#123;</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参数可以拥有默认值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">query GetAuthor($authorID: Int! = 5) &#123;</span><br><span class="line">  author(id: $authorID) &#123;</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参数也可以是可选的或必须的，比如上述的<code>$authorID</code>变量是必须的，它的定义中包含了<code>!</code>。详细信息可见<code>schema</code>中。</p>
+<h4 id="Allases"><a href="#Allases" class="headerlink" title="Allases"></a>Allases</h4><p>别名，比如说，我们想分别获取ID5和7，我们可以用下面的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  author(id: 5) &#123;</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">  author(id: 7) &#123;</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于存在相同的<code>name</code>，上述代码会报错，要解决这个问题就要用到别名了<code>Allases</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  chimezie: author(id: 5) &#123;</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">  neo: author(id: 7) &#123;</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>获取的结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Response</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;chimezie&quot;: &#123;</span><br><span class="line">      &quot;name&quot;: &quot;Chimezie Enyinnaya&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;neo&quot;: &#123;</span><br><span class="line">      &quot;name&quot;: &quot;Neo Ighodaro&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Fragments"><a href="#Fragments" class="headerlink" title="Fragments"></a>Fragments</h4><p><code>Fragments</code>是一套在<code>queries</code>中可复用的<code>fields</code>。比如说我们想获取<code>twitterHandle</code>field，我们可以按下面这样做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  chimezie: author(id: 5) &#123;</span><br><span class="line">    name</span><br><span class="line">    twitterHandle</span><br><span class="line">  &#125;</span><br><span class="line">  neo: author(id: 7) &#123;</span><br><span class="line">    name</span><br><span class="line">    twitterHandle</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是如果<code>fields</code>过多，就会显得重复和冗余。Fragments在此时就可以起作用了。以下是使用<code>Fragments</code>的语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  chimezie: author(id: 5) &#123;</span><br><span class="line">    ...authorDetails</span><br><span class="line">  &#125;</span><br><span class="line">  neo: author(id: 7) &#123;</span><br><span class="line">    ...authorDetails</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fragment authorDetails on Author &#123;</span><br><span class="line">  name</span><br><span class="line">  twitterHandle</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Directives"><a href="#Directives" class="headerlink" title="Directives"></a>Directives</h4><p><code>Directives</code>提供了一种动态使用变量改变我们的<code>queries</code>的方法。如本例，我们会用到以下两个<code>directive</code>:</p>
+<ul>
+<li><code>@include</code>:只有当<code>if</code>中的参数为<code>true</code>时，才会包含对应<code>fragment</code>或<code>field</code>；</li>
+<li><code>@skip</code>:当<code>if</code>中的参数为<code>true</code>时,会跳过对应<code>fragment</code>或<code>field</code>；</li>
+</ul>
+<p>这两个<code>directive</code>都接受一个布尔值作为参数；</p>
+<p><strong>实例如下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">query GetAuthor($authorID: Int!, $notOnTwitter: Boolean!, $hasPosts: Post) &#123;</span><br><span class="line">  author(id: $authorID) &#123;</span><br><span class="line">    name</span><br><span class="line">    twitterHandle @skip(if: $notOnTwitter)</span><br><span class="line">    posts @include(if: $hasPosts) &#123;</span><br><span class="line">      title</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Mutation"><a href="#Mutation" class="headerlink" title="Mutation"></a>Mutation</h2><p>传统的API使用场景中，我们会有需要修改服务器上数据的场景，<code>mutations</code>就是应这种场景而生。<code>mutations</code>被用以执行写操作，通过<code>mutations</code>我们会给服务器发送请求来修改和更新数据，并且会接收到包含更新数据的反馈。<code>mutations</code>和<code>queries</code>具有类似的语法，仅有些许的差别。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mutation UpdateAuthorDetails($authorID: Int!, $twitterHandle: String!) &#123;</span><br><span class="line">  updateAuthor(id: $authorID, twitterHandle: $twitterHandle) &#123;</span><br><span class="line">    twitterHandle</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们在<code>mutation</code>中以数据为载物发送，比如上面的例子中，我们发送了下面的数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Update data</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"> &quot;authorID&quot;: 5,</span><br><span class="line"> &quot;twitterHandle&quot;: &quot;ammezie&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更新完成后，我们将从服务器获取以下内容作为反馈。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Response after update</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;id&quot;: 5,</span><br><span class="line">    &quot;twitterHandle&quot;: &quot;ammezie&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看出，反馈数据中包含我们更新的数据</p>
+<p>和<code>queries</code>类似，<code>mutations</code>也能够接受，多重<code>fields</code>,不过<code>queries</code>和<code>mutations</code>的一个重大不同之处在于，为了保证数据的完整性<code>mutations</code>是串形执行，而<code>queries</code>可以并行执行。</p>
+<h2 id="Schemas"><a href="#Schemas" class="headerlink" title="Schemas"></a>Schemas</h2><p>Schemas 描述了 数据的组织形态 以及服务器上的那些数据能够被查询，Schemas提供了你数据中可用的数据的对象类型，GraphQL中的对象是强类型的，因此schema中定义的所有的对象必须具备类型。类型允许GraphQL服务器确定查询是否有效或者是否在运行时。Schemas可用是两种类型<code>Query</code>和<code>Mutation</code>。</p>
+<p><code>Schemas</code>用GraphQL schemas语言构建，它和我们前面已经学过的query非常类似，下面是一个示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">type Author &#123;</span><br><span class="line">  name: String!</span><br><span class="line">  posts: [Post]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的<code>schemas</code>定义了一个<code>Author</code>对象，它包含两个<code>fields</code>(<code>name</code>和<code>posts</code>),这意味着当我们操作（读取）<code>Author</code>时，我们只能使用<code>name</code>和<code>fields</code>,每个<code>field</code>都可以是必须的或者可选的,比如上面的<code>name</code>field是必须的，因为其后有符号<code>!</code>,而<code>posts</code>是可选的。</p>
+<h3 id="Arguments"><a href="#Arguments" class="headerlink" title="Arguments"></a>Arguments</h3><p>Schemas中的Fields 也可以接收参数，这些参数可以是可选的或者必须的，必须的参数通过<code>!</code>识别。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type Post &#123;</span><br><span class="line">  allowComments(comments: Boolean!)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="标量类型"><a href="#标量类型" class="headerlink" title="标量类型"></a>标量类型</h3><p>顺便提一下，<code>GraphQL</code>支持以下标量类型：</p>
+<ul>
+<li>Int: 带符号的32位整数</li>
+<li>Float: 带符号的双精度浮点数</li>
+<li>String: UTF-8 字符串</li>
+<li>Boolean: true or false</li>
+<li>ID: 唯一标识符</li>
+</ul>
+<p>由上述类型定义的fields 不能 再拥有自己的 fields，我们可以使用<code>scalar</code>关键字，自定义标量类型，比如我们可以定义一个<code>Date</code>类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scalar Date</span><br></pre></td></tr></table></figure>
+
+<h4 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h4><p>又称<code>Enums</code>,这是一种特殊的标量类型，通过此类型，我们可以限制值为一组特殊的值，比如，我们可以：</p>
+<ul>
+<li>保证此类型的任何参数都是允许值之一；</li>
+<li>通过类型系统进行通信，该字段始终是有限值集之一。</li>
+</ul>
+<p><code>Enums</code>通过关键字<code>enum</code>进行定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enum Media &#123;</span><br><span class="line">  Image</span><br><span class="line">  Video</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="输入类型"><a href="#输入类型" class="headerlink" title="输入类型"></a>输入类型</h4><p>input类型对mutations来说非常重要，在 GraphQL schema 语言中，它看起来和常规的对象类型非常类似，但是我们使用关键字<code>input</code>而非<code>type</code>,<code>input</code>类型按如下定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Input Type</span><br><span class="line"></span><br><span class="line">input CommentInput &#123;</span><br><span class="line">  body: String!</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="../../../../js/plugin.js"></script>
+<script src="../../../../js/diaspora.js"></script>
+<link rel="stylesheet" href="../../../../photoswipe/photoswipe.css">
+<link rel="stylesheet" href="../../../../photoswipe/default-skin/default-skin.css">
+<script src="../../../../photoswipe/photoswipe.min.js"></script>
+<script src="../../../../photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
