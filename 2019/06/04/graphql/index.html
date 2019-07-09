@@ -79,6 +79,30 @@
 <li>兼容于任何后台：GraphQL不限于某一特定数据库，可以使用已经存在的数据，代码，甚至可以连接第三方的APIs.</li>
 <li>好反省的：GraphQL服务器能够查询架构的细节。</li>
 </ul>
+<h3 id="GraphQL和RESTful的区别"><a href="#GraphQL和RESTful的区别" class="headerlink" title="GraphQL和RESTful的区别"></a>GraphQL和RESTful的区别</h3><p>REST 与 GraphQL 都是服务端所承载的系统对外的服务接口，因此两者肯定是可以共存的，甚至可以共用一套 Authorization 等业务逻辑。</p>
+<p>那么 GraphQL 与 RESTful 的具体区别有什么呢？我觉得主要是两点。</p>
+<h4 id="1-入口-entry-point"><a href="#1-入口-entry-point" class="headerlink" title="1. 入口 (entry point)"></a>1. 入口 (entry point)</h4><p>RESTful 的核心理念在于资源 (resource)，且讲究一个 RESTful 接口仅操作单一资源；因此在你使用 RESTful 时，会设计出大量的接口。GraphQL 是单一入口，一般配置在 <code>[host]/graphql/</code>，所有的资源都从该入口通过 graphql 的语句获取或修改（当然 GraphQL 亦支持多入口，但显然多入口的数量也远小于 RESTful）。</p>
+<h4 id="2-数据的关联性"><a href="#2-数据的关联性" class="headerlink" title="2. 数据的关联性"></a>2. 数据的关联性</h4><p>RESTful 所操作的资源相对是离散的；而 GraphQL 的数据更有整体性。</p>
+<p>举个例子，如果要获取 A 的朋友的朋友，用 RESTful 该怎么做呢？</p>
+<p>假设我们有这样一个接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /user/:userId/friends/</span><br></pre></td></tr></table></figure>
+
+<p>而 A 有 20 个好朋友，那么我们总共需要发送 20 + 1 = 21 次 REST 请求。</p>
+<p>或者我们为了这种特殊场景设计出以下接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /user/:userId/friendsAndHisFriends/</span><br></pre></td></tr></table></figure>
+
+<p>emmmmm… 虽然看起来很别扭，但是只需要一次请求呢！</p>
+<p>那么在 GraphQL 中，怎么做呢？</p>
+<p>首先我们需要给 User 定义 Schema (GraphQL 有一套完整的<a href="https://graphql.org/learn/schema/" target="_blank" rel="noopener">类型系统</a>)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type User &#123;</span><br><span class="line">  id: ID!</span><br><span class="line">  name: String!</span><br><span class="line">  friends: [User]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假设我们在 Graph root 上只挂了一个 Node，叫 user:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type Query &#123;</span><br><span class="line">  user(id: ID!): User</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么我们从客户端发送的 query 就可以写成这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">query ($userId: ID) &#123;</span><br><span class="line">  user(id: $userId) &#123;</span><br><span class="line">    name</span><br><span class="line">    friends &#123;</span><br><span class="line">      name</span><br><span class="line">      friends &#123;</span><br><span class="line">        name</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后这一个请求就搞定查询朋友的朋友这个蛋疼的需求啦！机智的你肯定已经发现了：这个 query 是不是可以无限循环地写下去？你想的没错，确实可以这么干！</p>
 <p>GraphQL的核心包括<code>Query</code>,<code>Mutation</code>,<code>Schemas</code>等等，每个概念下又有一些子概念,下面分别做简单的介绍：</p>
 <h2 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h2><p>Queries用做读操作，也就是从服务器获取数据。Queries定义了我们对模式执行的行为。下面是一个简单的查询及相应的结果：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Basic GraphQL Query</span></span><br><span class="line"></span><br><span class="line">   &#123;</span><br><span class="line">     author &#123;</span><br><span class="line">       name</span><br><span class="line">       posts &#123;</span><br><span class="line">         title</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
@@ -115,15 +139,6 @@
 <p>但是如果<code>fields</code>过多，就会显得重复和冗余。Fragments在此时就可以起作用了。以下是使用<code>Fragments</code>的语法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  chimezie: author(id: <span class="number">5</span>) &#123;</span><br><span class="line">    ...authorDetails</span><br><span class="line">  &#125;</span><br><span class="line">  neo: author(id: <span class="number">7</span>) &#123;</span><br><span class="line">    ...authorDetails</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fragment authorDetails on Author &#123;</span><br><span class="line">  name</span><br><span class="line">  twitterHandle</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="Directives"><a href="#Directives" class="headerlink" title="Directives"></a>Directives</h4><p><code>Directives</code>提供了一种动态使用变量改变我们的<code>queries</code>的方法。如本例，我们会用到以下两个<code>directive</code>:</p>
-<ul>
-<li><code>@include</code>:只有当<code>if</code>中的参数为<code>true</code>时，才会包含对应<code>fragment</code>或<code>field</code>；</li>
-<li><code>@skip</code>:当<code>if</code>中的参数为<code>true</code>时,会跳过对应<code>fragment</code>或<code>field</code>；</li>
-</ul>
-<p>这两个<code>directive</code>都接受一个布尔值作为参数；</p>
-<p><strong>实例如下：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">query GetAuthor($authorID: Int!, <span class="attr">$notOnTwitter</span>: <span class="built_in">Boolean</span>!, <span class="attr">$hasPosts</span>: Post) &#123;</span><br><span class="line">  author(id: $authorID) &#123;</span><br><span class="line">    name</span><br><span class="line">    twitterHandle @skip(<span class="keyword">if</span>: $notOnTwitter)</span><br><span class="line">    posts @include(<span class="keyword">if</span>: $hasPosts) &#123;</span><br><span class="line">      title</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="Mutation"><a href="#Mutation" class="headerlink" title="Mutation"></a>Mutation</h2><p>传统的API使用场景中，我们会有需要修改服务器上数据的场景，<code>mutations</code>就是应这种场景而生。<code>mutations</code>被用以执行写操作，通过<code>mutations</code>我们会给服务器发送请求来修改和更新数据，并且会接收到包含更新数据的反馈。<code>mutations</code>和<code>queries</code>具有类似的语法，仅有些许的差别。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mutation UpdateAuthorDetails($authorID: Int!, <span class="attr">$twitterHandle</span>: <span class="built_in">String</span>!) &#123;</span><br><span class="line">  updateAuthor(id: $authorID, <span class="attr">twitterHandle</span>: $twitterHandle) &#123;</span><br><span class="line">    twitterHandle</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -140,9 +155,6 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">type Author &#123;</span><br><span class="line">  name: <span class="built_in">String</span>!</span><br><span class="line">  posts: [Post]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>上面的<code>schemas</code>定义了一个<code>Author</code>对象，它包含两个<code>fields</code>(<code>name</code>和<code>posts</code>),这意味着当我们操作（读取）<code>Author</code>时，我们只能使用<code>name</code>和<code>fields</code>,每个<code>field</code>都可以是必须的或者可选的,比如上面的<code>name</code>field是必须的，因为其后有符号<code>!</code>,而<code>posts</code>是可选的。</p>
-<h3 id="Arguments"><a href="#Arguments" class="headerlink" title="Arguments"></a>Arguments</h3><p>Schemas中的Fields 也可以接收参数，这些参数可以是可选的或者必须的，必须的参数通过<code>!</code>识别。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type Post &#123;</span><br><span class="line">  allowComments(comments: <span class="built_in">Boolean</span>!)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="标量类型"><a href="#标量类型" class="headerlink" title="标量类型"></a>标量类型</h3><p>顺便提一下，<code>GraphQL</code>支持以下标量类型：</p>
 <ul>
 <li>Int: 带符号的32位整数</li>
